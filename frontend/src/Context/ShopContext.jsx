@@ -15,15 +15,19 @@ const getDefaultCart = () => {
 const ShopContextProvider = (props) => {
 
     const [cartItem, setCartItem] = useState(getDefaultCart());
+
+    const [total, setTotal] = useState(0);
     
     // console.log(cartItem)
     
-    const addToCart = (itemId) => {
+    const addToCart = (itemId, itemPrice) => {
         setCartItem((prev) => ({...prev, [itemId]:prev[itemId]+1}))
+        setTotal(prev => prev + itemPrice)
         console.log(cartItem);
     }
-    const removeFromCart = (itemId) => {
+    const removeFromCart = (itemId, itemPrice) => {
         setCartItem((prev) => ({...prev, [itemId]:prev[itemId]-1}))
+        setTotal(prev => prev - itemPrice)
     }
 
     const getTotalCartAmount = () => {
@@ -52,7 +56,7 @@ const ShopContextProvider = (props) => {
         return total;
     }
     
-    const contextValue = {getTotalCartItems, getTotalCartAmount, all_product, cartItem, addToCart, removeFromCart};
+    const contextValue = {getTotalCartItems, getTotalCartAmount, all_product, cartItem, addToCart, removeFromCart, total, setTotal};
 
 
     return (
