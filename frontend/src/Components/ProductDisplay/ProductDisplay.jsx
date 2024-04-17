@@ -1,11 +1,15 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './ProductDisplay.css';
 import star_icon from '../Assests/star_icon.png'
 import star_dull_icon from '../Assests/star_dull_icon.png'
+import { ShopContext } from '../../Context/ShopContext';
 
 
 const ProductDisplay = (props) => {
     const {product} = props
+    const {addToCart} = useContext(ShopContext);
+
+
   return (
     <div className = 'productdisplay'>
         <div className='productdisplay-left'>
@@ -34,11 +38,12 @@ const ProductDisplay = (props) => {
                 <div className='productdisplay-right-price-new'>${product.new_price}</div>
             </div>
             <div className='productdisplay-right-description'>
-                lorem ipsum
+                A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline
+                and shirt sleeves, worn as an undershirt or an outer garment
             </div>
             <div className = "productdisplay-right-size">
                 <h1>SELECT SIZE</h1>
-                <div className = "productdisplay-right-size">
+                <div className = "productdisplay-right-sizes">
                     <div>S</div>
                     <div>M</div>
                     <div>L</div>
@@ -46,9 +51,9 @@ const ProductDisplay = (props) => {
                     <div>XXL</div>
                 </div>
             </div>
-            <button>ADD TO CART</button>
-            <p className ="product-display-right-category"><span>Category: </span>Women, T-Shirt, CropTop</p>
-            <p className ="product-display-right-category"><span>Tags: </span>Modern, Latest</p>
+            <button onClick = {() => {addToCart(product.id)}}>ADD TO CART</button>
+            <p className ="productdisplay-right-category"><span>Category : </span> {product.category}</p>
+            <p className ="productdisplay-right-category"><span>Tags : </span> Modern, Latest</p>
         </div>
     </div>
   )
